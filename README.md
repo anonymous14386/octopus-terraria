@@ -2,48 +2,41 @@
 
 Terraria 1.4.5 dedicated server for Octopus Technology.
 
-## Configuration
+## Setup in Portainer
 
-### Environment Variables
-- `WORLD_NAME`: Name of the Terraria world (default: "Octopus World")
-- `MAX_PLAYERS`: Maximum players (default: 16)
-- `PORT`: Server port (default: 7777)
-- `PASSWORD`: Server password (leave empty for no password)
-- `DIFFICULTY`: 0=Normal, 1=Expert, 2=Master, 3=Journey
-- `WORLD_SIZE`: 1=Small, 2=Medium, 3=Large
-- `MOTD`: Message of the day
-
-## Quick Start
-
-1. **Deploy via Portainer**:
-   - Go to Stacks → Add stack
-   - Name it "octopus-terraria"
-   - Use Git repository: `https://github.com/anonymous14386/octopus-terraria.git`
+1. **Deploy Stack**:
+   - Stacks → Add stack → "octopus-terraria"
+   - Paste the docker-compose.yml content
    - Deploy
 
-2. **Connect**: `your-server-ip:7777`
+2. **Initial World Creation** (one-time):
+   - Go to Containers → octopus_terraria → Console
+   - Select `/bin/sh` and click "Connect"
+   - Type `n` (new world)
+   - Choose world size: `2` (medium)
+   - Choose difficulty: `0` (classic), `1` (expert), or `2` (master)
+   - Enter world name: `Octopus World`
+   - Enter seed (or press Enter to skip)
+   - Select the world number (usually `1`)
+   - Set max players: `16`
+   - Set port: `7777` (press Enter for default)
+   - Automatically forward port: `n`
+   - Set password (or press Enter for no password)
 
-## Network Access
+3. **Done!** The world persists in the Docker volume. Future restarts will load it automatically.
 
-### Direct IP Access
-- Connect via: `your-server-ip:7777`
-- Port 7777 is exposed via docker-compose
+## Connect
 
-### Cloudflare Setup (after IP works)
+- Direct IP: `your-server-ip:7777`
+- Domain: `terraria.octopustechnology.net:7777` (after DNS setup)
+
+## Connect
+## Cloudflare DNS Setup
+
 1. Add A record: `terraria.octopustechnology.net` → your server IP
-2. **Important**: Set proxy to "DNS only" (gray cloud), not proxied
-   - Cloudflare doesn't support UDP game traffic through proxy
-3. Connect via: `terraria.octopustechnology.net:7777`
+2. **Important**: Set to "DNS only" (gray cloud) - Cloudflare can't proxy UDP game traffic
 
-## World Management
-
-Worlds are stored in `./world/` directory. They persist across container restarts.
-
-## Logs
-
-View logs in Portainer or via:
-```bash
-docker logs -f terraria-server
+## Server Managementerver
 ```
 
 ## Server Commands
@@ -62,3 +55,10 @@ Common commands:
 - `ban <player>` - Ban a player
 - `save` - Save world
 - `exit` - Stop server
+## Server Management
+
+**View Logs**: Portainer → Containers → octopus_terraria → Logs
+
+**Access Console**:
+```bash
+docker attach octopus_terraria
