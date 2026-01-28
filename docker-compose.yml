@@ -5,18 +5,19 @@ services:
     image: ryshe/terraria:vanilla-latest
     container_name: octopus_terraria
     restart: always
+    # These two lines are crucial for Terraria to accept input/output correctly
+    tty: true
+    stdin_open: true
     ports:
       - "7777:7777"
+    environment:
+      - WORLD_FILENAME=Octopus.wld
+      - WORLD_NAME=Octopus World
+      - SEED=05162020
+      - DIFFICULTY=0
+      - MAX_PLAYERS=16
     volumes:
       - terraria_world:/root/.local/share/Terraria/Worlds
-    command: >
-      bash -c "
-      if [ -f /root/.local/share/Terraria/Worlds/Octopus.wld ]; then
-        ./TerrariaServer.bin.x86_64 -world /root/.local/share/Terraria/Worlds/Octopus.wld -autocreate 0
-      else
-        ./TerrariaServer.bin.x86_64 -world /root/.local/share/Terraria/Worlds/Octopus.wld -autocreate 2 -worldname 'Octopus World' -difficulty 0 -maxplayers 16 -port 7777 -seed 05162020
-      fi
-      "
 
 volumes:
   terraria_world:
