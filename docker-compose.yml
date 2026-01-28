@@ -13,13 +13,12 @@ services:
       - terraria_world:/root/.local/share/Terraria/Worlds
       - terraria_config:/config
     environment:
-      - WORLD_FILENAME=Octopus.wld
       - WORLD_NAME=Octopus World
+      - AUTOCREATE=2
       - MAX_PLAYERS=16
       - PORT=7777
       - PASSWORD=
       - DIFFICULTY=1
-      - WORLD_SIZE=2
       - SEED=
       - MOTD=Welcome to Octopus Technology Terraria Server!
 
