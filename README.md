@@ -13,39 +13,27 @@ Terraria 1.4.5 dedicated server for Octopus Technology.
 - `WORLD_SIZE`: 1=Small, 2=Medium, 3=Large
 - `MOTD`: Message of the day
 
-## Deployment via Portainer
+## Quick Start
 
-1. Copy this folder to your server
-2. In Portainer, go to Stacks → Add stack
-3. Name it "octopus-terraria"
-4. Upload this docker-compose.yml or use repository method
-5. Deploy
+1. **Deploy via Portainer**:
+   - Go to Stacks → Add stack
+   - Name it "octopus-terraria"
+   - Use Git repository: `https://github.com/anonymous14386/octopus-terraria.git`
+   - Deploy
+
+2. **Connect**: `your-server-ip:7777`
 
 ## Network Access
 
 ### Direct IP Access
-- Port 7777 must be open in your firewall
 - Connect via: `your-server-ip:7777`
+- Port 7777 is exposed via docker-compose
 
 ### Cloudflare Setup (after IP works)
 1. Add A record: `terraria.octopustechnology.net` → your server IP
 2. **Important**: Set proxy to "DNS only" (gray cloud), not proxied
    - Cloudflare doesn't support UDP game traffic through proxy
 3. Connect via: `terraria.octopustechnology.net:7777`
-
-## Firewall Configuration
-
-For NixOS (in your configuration.nix):
-```nix
-networking.firewall.allowedTCPPorts = [ 7777 ];
-networking.firewall.allowedUDPPorts = [ 7777 ];
-```
-
-Or via iptables:
-```bash
-sudo iptables -A INPUT -p tcp --dport 7777 -j ACCEPT
-sudo iptables -A INPUT -p udp --dport 7777 -j ACCEPT
-```
 
 ## World Management
 
@@ -63,7 +51,7 @@ docker logs -f terraria-server
 Attach to server console:
 ```bash
 docker attach terraria-server
-```
+```the `terraria_world` Docker volume and
 
 Detach: `Ctrl+P, Ctrl+Q` (don't use Ctrl+C, it stops the server)
 
@@ -74,5 +62,3 @@ Common commands:
 - `ban <player>` - Ban a player
 - `save` - Save world
 - `exit` - Stop server
-# octopus-terraria
-# octopus-terraria
