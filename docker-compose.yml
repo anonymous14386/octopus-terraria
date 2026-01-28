@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   terraria:
-    image: ryshe/terraria:vanilla-1.4.4.9
+    image: beardedio/terraria:latest
     container_name: octopus_terraria
     restart: always
     stdin_open: true
@@ -10,18 +10,16 @@ services:
     ports:
       - "7777:7777"
     volumes:
-      - terraria_world:/root/.local/share/Terraria/Worlds
-      - terraria_config:/config
+      - terraria_world:/world
     environment:
-      - WORLD_NAME=Octopus World
+      - WORLD=/world/Octopus.wld
       - AUTOCREATE=2
-      - MAX_PLAYERS=16
+      - WORLDNAME=Octopus World
+      - MAXPLAYERS=16
       - PORT=7777
       - PASSWORD=
       - DIFFICULTY=1
-      - SEED=
-      - MOTD=Welcome to Octopus Technology Terraria Server!
+      - MOTD=Welcome to Octopus Technology!
 
 volumes:
   terraria_world:
-  terraria_config:
