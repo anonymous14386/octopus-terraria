@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  terraria:
+    image: ryshe/terraria:vanilla-1.4.4.9
+    container_name: terraria-server
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    ports:
+      - "7777:7777"
+    volumes:
+      - ./world:/root/.local/share/Terraria/Worlds
+      - ./config:/config
+    environment:
+      - WORLD_FILENAME=Octopus.wld
+      - WORLD_NAME=Octopus World
+      - MAX_PLAYERS=16
+      - PORT=7777
+      - PASSWORD=
+      - DIFFICULTY=1
+      - WORLD_SIZE=2
+      - SEED=
+      - MOTD=Welcome to Octopus Technology Terraria Server!
+    networks:
+      - terraria-net
+
+networks:
+  terraria-net:
+    driver: bridge
