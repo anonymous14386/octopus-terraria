@@ -1,0 +1,15 @@
+world=/world/Octopus.wld
+autocreate=2
+worldname=Octopus World
+difficulty=1
+maxplayers=16
+port=7777
+password=
+motd=Welcome to Octopus Technology Terraria Server!
+worldpath=/world
+banlist=/config/banlist.txt
+secure=1
+language=en-US
+upnp=0
+npcstream=60
+priority=1

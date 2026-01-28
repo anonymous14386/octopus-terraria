@@ -11,6 +11,7 @@ services:
       - "7777:7777"
     volumes:
       - terraria_world:/world
+      - ./serverconfig.txt:/config/serverconfig.txt:ro
     environment:
       - WORLD=/world/Octopus.wld
       - AUTOCREATE=2
