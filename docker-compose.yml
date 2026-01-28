@@ -5,12 +5,12 @@ services:
     image: ryshe/terraria:vanilla-latest
     container_name: octopus_terraria
     restart: always
-    stdin_open: true
-    tty: true
     ports:
       - "7777:7777"
     volumes:
       - terraria_world:/root/.local/share/Terraria/Worlds
+      - ./start-server.sh:/start-server.sh:ro
+    entrypoint: ["/bin/bash", "/start-server.sh"]
 
 volumes:
   terraria_world:
