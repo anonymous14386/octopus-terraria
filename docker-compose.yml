@@ -9,8 +9,14 @@ services:
       - "7777:7777"
     volumes:
       - terraria_world:/root/.local/share/Terraria/Worlds
-      - ./start-server.sh:/start-server.sh:ro
-    entrypoint: ["/bin/bash", "/start-server.sh"]
+    command: >
+      bash -c "
+      if [ -f /root/.local/share/Terraria/Worlds/Octopus.wld ]; then
+        ./TerrariaServer.bin.x86_64 -world /root/.local/share/Terraria/Worlds/Octopus.wld -autocreate 0
+      else
+        ./TerrariaServer.bin.x86_64 -world /root/.local/share/Terraria/Worlds/Octopus.wld -autocreate 2 -worldname 'Octopus World' -difficulty 0 -maxplayers 16 -port 7777 -seed 05162020
+      fi
+      "
 
 volumes:
   terraria_world:
