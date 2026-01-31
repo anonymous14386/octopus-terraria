@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   terraria:
-    image: ryshe/terraria:vanilla-latest
+    image: ryshe/terraria:latest
     container_name: octopus_terraria
     restart: always
     tty: true
